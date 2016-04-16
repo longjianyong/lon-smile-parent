@@ -14,11 +14,17 @@ import com.lon.smile.framework.service.UserIF;
 public class UserController  {
 	@Autowired
 	private UserIF userService;
-	
+
 	@RequestMapping("/showUserInfo/{userId}")
 	public String showUserInfo(ModelMap modelMap, @PathVariable int userId){
 		UserInfo userInfo = userService.getUserById(userId);
+		userService.insert(userInfo);
 		modelMap.addAttribute("info", userInfo);
+		return "/showInfo";
+	}
+	@RequestMapping("/test")
+	public String test(ModelMap modelMap){
+		System.out.println(123);
 		return "/showInfo";
 	}
 }
